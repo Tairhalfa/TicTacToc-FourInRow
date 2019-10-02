@@ -1,0 +1,53 @@
+package game;
+
+import java.util.Scanner;
+
+public class FourInARow extends Game{
+	
+
+	public FourInARow(String player1, String player2)
+	
+	{
+		super(6, 7, new Player(player1,'W'), new Player(player2,'B'));
+	}
+	protected boolean doesWin(int i, int j)
+	{
+
+		int len;
+		do
+		{
+			len = maxLineContaining(i, j);
+		}while (len != 4 && isFull());
+		return true;
+	}
+	protected boolean onePlay(Player p)
+	{
+		int j, i, flag = 0;
+		s = new Scanner(System.in);
+		do
+		{	
+			i = 0;
+			System.out.println(p.toString() +", Please enter j: ");
+			j = s.nextInt();
+			while(i!=6 && flag != 1)
+			{
+				if(super.set(i,j, p) != false)
+				{
+					flag = 1;
+				}
+				else i++;
+			}
+		}while(flag != 1);
+		
+		if(doesWin(i,j))
+		{
+			System.out.println(p.toString() +"Won!\n");
+			return true;
+		}
+		
+		return false;
+	}
+	}
+	
+
+
